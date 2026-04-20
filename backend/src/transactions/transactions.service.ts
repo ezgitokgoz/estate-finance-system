@@ -5,7 +5,7 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { TransactionStatus, CommissionPolicy, TRANSACTION_STATUS_ORDER } from './constants/transaction.constants';
 
-import { toTitleCase, generateTurkishRegex } from '../common/utils/string.utils';
+import { toTitleCase, generateTurkishRegex } from '../common/utils/string-helper';
 
 @Injectable()
 export class TransactionsService {

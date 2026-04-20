@@ -6,17 +6,18 @@ export default defineNuxtConfig({
   
   typescript: {
     typeCheck: false,
-    shim: false,
-    tsConfig: {
-      compilerOptions: {
-        skipLibCheck: true,
-      }
-    }
+    strict: false,
+    shim: false
   },
 
   vite: {
     build: {
       sourcemap: false,
+    },
+    server: {
+      fs: {
+        strict: false
+      }
     }
   },
 

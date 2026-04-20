@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import { useTransactionStore } from '~/stores/transaction'
 
 const store = useTransactionStore()
+const config = useRuntimeConfig()
+const apiBase = config.public.apiBase
 
 // --- Shared States ---
 const searchQuery = ref('')
@@ -18,16 +20,20 @@ const filteredTransactions = computed(() => {
 
 // --- Methods ---
 const downloadPdf = (id: string) => {
-  window.open(`http://localhost:3000/transactions/${id}/pdf`, '_blank');
+  window.open(`${apiBase}/transactions/${id}/pdf`, '_blank');
 }
 
 const downloadExcel = () => {
-  const url = `http://localhost:3000/transactions/export/excel?search=${searchQuery.value}&status=${statusFilter.value}`;
+  const url = `${apiBase}/transactions/export/excel?search=${searchQuery.value}&status=${statusFilter.value}`;
   window.open(url, '_blank');
 }
 
 const handleLoadMore = async () => {
   await store.fetchTransactions(store.transactions.length, searchQuery.value, statusFilter.value, sortOrder.value)
+}
+
+const setLoadMoreTrigger = (el: Element | ComponentPublicInstance | null) => {
+  loadMoreTrigger.value = el as HTMLElement | null
 }
 
 // --- Lifecycle & Watchers ---
@@ -88,7 +94,7 @@ watch(sortOrder, (newVal) => {
       :transactions="filteredTransactions"
       :loading="store.loading"
       :has-more="store.hasMore"
-      :load-more-trigger="(el: Element | ComponentPublicInstance | null) => loadMoreTrigger = el as HTMLElement | null"
+      :load-more-trigger="setLoadMoreTrigger"
       @download-pdf="downloadPdf"
     />
 

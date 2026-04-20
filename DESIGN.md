@@ -82,7 +82,7 @@ The system is built on a decoupled **Client-Server architecture**. This separati
 ### The Transaction Schema
 A central thesis of this system is the **Transaction** document. Since real estate deals involve complex and sensitive financial data, consistency is critical.
 
-We elected to use an **Embedded Financial Breakdown Pattern**.
+The Embedded Financial Breakdown Pattern was utilized.
 
 #### Why Embed Financial Calculations?
 Commission policies (like 50% / 50% split) can change over time. If a policy changes in 2026, transactions from 2025 must remain untouched. By calculating the commission *at the time of creation/mutation* and embedding the exact numerical breakdown directly inside the Transaction document, we create an immutable **Audit Log**.

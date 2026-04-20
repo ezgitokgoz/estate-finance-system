@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: false },
   modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss'],
+  typescript: {
+    typeCheck: false,
+    shim: false
+  },
   devServer: {
     port: 3001
   },

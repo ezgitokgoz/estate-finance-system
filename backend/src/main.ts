@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:3001', // Allow CORS strictly for our frontend
+    origin: ['http://localhost:3001', 'https://incomparable-rugelach-0b115f.netlify.app'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
@@ -30,7 +30,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('transactions')
     .build();
-  
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
   // -------------------------------
